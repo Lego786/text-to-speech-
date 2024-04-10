@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</head>
+<style>
+    body{
+        background-image: url(background-img.jpg);
+        
+        width: 100%;
+        background-repeat: no-repeat;
+    }
+    h1{
+
+      color: rgb(237, 143, 143);  
+      text-align: center;
+     background: -webkit-linear-gradient(#d60000, #540000);
+   -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+               
+    
+    }
+    textarea {
+     border-radius: 0.5rem;
+     background-color: rgba(255, 255, 255, 0.711);
+
+    
+}
+#speakbtn{
+    width: 8rem;
+    color: white;
+    background: -webkit-linear-gradient(#d60000, #540000); 
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+}
+#speakbtn:hover{
+    background-color: white;
+    border: 1px solid red;
+    background: -webkit-linear-gradient(#ffffff, #ffa7a7); 
+    color: #d60000;
+    font-weight: 600;
+    box-shadow: rgba(251, 0, 0, 0.567) 0px 3px 8px;
+}
+.main-div{
+    background-color: #ffffff64;
+    height: auto;
+    border-radius:0.5rem ;
+    box-shadow: rgba(255, 255, 255, 0.35) 0px 5px 15px;
+    margin-top: 4rem;
+}
+:root {
+  --angle: 45deg;
+  --opacity: 0.5;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.main-div {
+  /* width: 400px; */
+  /* height: 300px; */
+  border-radius: 10px;
+  /* padding: 2rem; */
+  /* margin: auto; */
+
+  /* display: grid; */
+  place-content: center;
+  text-align: center;
+
+  font-size: 1.5em;
+
+  --border-size: 0.3rem;
+  border: var(--border-size) solid transparent;
+
+  /* Paint an image in the border */
+  border-image: conic-gradient(
+      from var(--angle),
+      #ff1100 0deg 90deg,
+      #690303 90deg 180deg,
+      #ff0000 180deg 270deg,
+      #620000 270deg 360deg
+    )
+    1 stretch;
+  background: rgb(255 255 255 / var(--opacity));
+}
+
+/** show a warning in browers that don't support it **/
+.warning {
+  margin: 2em;
+  padding: 1em;
+  border: 1px solid #ccc;
+}
+.warning p {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+/* Animate when Houdini is available */
+@supports (background: paint(houdini)) {
+  @property --opacity {
+    syntax: "<number>";
+    initial-value: 0.5;
+    inherits: false;
+  }
+
+  @property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  @keyframes opacityChange {
+    to {
+      --opacity: 1;
+    }
+  }
+
+  @keyframes rotate {
+    to {
+      --angle: 360deg;
+    }
+  }
+
+  .main-div  {
+    animation: rotate 4s linear infinite,  3s infinite alternate;
+  }
+
+  /* Hide the warning */
+  .warning {
+    display: none;
+  }
+}
+
+html,
+body {
+  /* padding: 0;
+  margin: 0; */
+  /* height: 100%; */
+}
+
+body {
+  /* display: grid; */
+  place-content: center;
+  gap: 0.5em;
+
+  text-align: center;
+  /* line-height: 1.42; */  
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+</style>
+<body>
+    <div class="rainbow">
+    <div class="main-div container w-75" >
+    <h1 class="h1 mt-5 mb-5 pt-3">Text to Speech</h1>
+    <div class="text-center">
+    <textarea id="textbox" cols="50" rows="4" class="col-lg-4 col-md-4 col-sm-6 col-6 textarea mb-4"></textarea>
+    <br>
+    <button class="btn" id="speakbtn" onclick="speak()">SPEAK</button>
+</div>
+</div>
+</div>
+    <script>
+    function speak(){
+        let synth = window.speechSynthesis;
+        let voice = new SpeechSynthesisUtterance(`${textbox.value}`)
+        synth.speak(voice);
+    }
+    </script>
+</body>
+</html>
